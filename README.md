@@ -1,2 +1,12 @@
-# Cardiac-Pathology-Prediction
-Automatic cardiac pathology classification from CMRI with feature extraction, ML models, and experimental LV segmentation.
+# Cardiac Pathology Classification from CMRI
+
+This repository contains a pipeline for **automatic cardiac pathology classification** using cardiac magnetic resonance imaging (CMRI) data. The project was implemented for the IMA205 Challenge 2025 and aims to classify subjects into five diagnostic categories: healthy controls, myocardial infarction, dilated cardiomyopathy, hypertrophic cardiomyopathy, and abnormal right ventricle. By combining feature extraction from anatomical segmentations with machine learning models, the pipeline provides an interpretable and generalizable system for predicting cardiac pathologies.
+
+The pipeline starts with preprocessing CMRI images and their segmentations. For the training and validation sets, complete segmentations were provided for the right ventricle cavity, myocardium, and left ventricle cavity. In the test set, the left ventricle cavity (LVC) was missing, so a morphological hole-filling operation on the myocardium mask was applied to recover the LVC region. This simple yet effective approach ensures consistent and anatomically plausible segmentations across all test subjects.
+
+From these segmentations, clinically relevant features were extracted, including chamber volumes, ejection fractions, body surface area (BSA)-normalized metrics, and myocardial wall thickness statistics. These features were then used to train several machine learning models, including Logistic Regression, Support Vector Machines, Random Forests, and XGBoost. Feature selection and cross-validation strategies were applied to improve model generalization and reduce overfitting. The final submission, based on a Random Forest classifier, achieved an **accuracy of 88%** on the challenge test set.
+
+In addition to the main pipeline, an experimental approach for LVC segmentation was explored, inspired by the paper *Automatic Left Ventricle Segmentation Using Iterative Thresholding and an Active Contour Model With Adaptation on Short-Axis Cardiac MRI*. This method segments the LVC directly from MRI intensities through iterative thresholding without relying on prior anatomical masks. The experiment demonstrates a path toward more general-purpose segmentation methods.
+
+Overall, this project highlights the combination of anatomical feature extraction, classical machine learning, and experimental segmentation techniques to build a robust CAD system for cardiac pathology classification. The repository includes all scripts for preprocessing, feature extraction, model training, and the experimental LV segmentation approach.
+
